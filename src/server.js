@@ -1,5 +1,5 @@
 //importamos dependencias de librerias
-import express, { Router } from "express";
+import express from "express";
 import 'dotenv/config';
 import { dbConnection } from "./database/db.js";
 import router from "./routes/router.js";

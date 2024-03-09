@@ -2,10 +2,14 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
+import { isValidEmail } from "../helpers/emailValidation.js";
+import { isValidPassword } from "../helpers/passwordValidation.js";
 
 
 export const register = async (req, res) => {
     try {
+        console.log(1);
+        // validate body
         const { username, email, password } = req.body
 
         if (!username || !email || !password) {
@@ -14,27 +18,23 @@ export const register = async (req, res) => {
                 message: "All fields are required"
             })
         }
+        console.log(2);
+        // validate email & password
+        const validEmail = isValidEmail(email);
+        const validPassword = isValidPassword(password);
 
-        const validEmail = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
-        if (!validEmail.test(email)) {
-            return res.status(400).json({
+        if (!validEmail || !validPassword) {
+            res.status(400).json({
                 success: false,
-                message: "format email invalid"
+                message: "Email or password invalid"
             })
         }
-
-        if (password.length < 6 || password.length > 10) {
-            return res.status(400).json({
-                success: false,
-                message: "Password must contain between 6 and 10 characters"
-            })
-        }
-        const passwordEncrypted = bcrypt.hashSync(password, 5)
-
+        console.log(3);
+        // create new user using username, email & password
         const newUser = await User.create({
             username,
             email,
-            password: passwordEncrypted
+            password
         })
 
         res.status(201).json({
@@ -42,6 +42,7 @@ export const register = async (req, res) => {
             message: "User registered succesfully",
             data: newUser
         })
+        console.log(4);
     } catch (error) {
         res.status(500).json({
             success: false,
@@ -53,10 +54,9 @@ export const register = async (req, res) => {
 
 
 export const login = async (req, res) => {
-
     try {
-        const email = req.body.email
-        const password = req.body.password
+        // validate body
+        const { email, password } = req.body;
 
         if (!email || !password) {
             return res.status(400).json({
@@ -65,37 +65,28 @@ export const login = async (req, res) => {
             })
         }
 
-        const validEmail = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
-        if (!validEmail.test(email)) {
-            return res.status(400).json(
-                {
-                    success: false,
-                    message: "Email format is not valid"
-                }
-            )
-        }
-        const user = await User.findOne(
-            {
-                email: email
-            }
-        )
+        // validate data
+        const validEmail = isValidEmail(email);
+        const ValidPassword = isValidPassword(password);
 
-        if (!user) {
+        if (!validEmail || !ValidPassword) {
             res.status(400).json({
                 success: false,
                 message: "Email or password invalid"
             })
         }
 
-        const isValidPassword = bcrypt.compareSync(password, user.password)
+        // validate user exists
+        const user = await User.findOne({ email: email })
 
-        if (!isValidPassword) {
-            return res.status(400).json({
+        if (!user) {
+            res.status(400).json({
                 success: false,
-                message: "Email or password invalid"
+                message: "Cannot find the user"
             })
         }
 
+        // create token
         const token = jwt.sign(
             {
                 userId: user._id,

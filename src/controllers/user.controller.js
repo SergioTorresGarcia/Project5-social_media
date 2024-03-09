@@ -24,12 +24,10 @@ export const getUsers = async (req, res) => {
 }
 
 
-export const getUserById = async (req, res) => {
+export const getUserProfile = async (req, res) => {
     try {
-        const userId = req.params.id
+        const userId = req.tokenData.userId
         const user = await User.findById(userId)
-        console.log(user)
-
 
         res.status(200).json({
             success: true,
@@ -46,23 +44,30 @@ export const getUserById = async (req, res) => {
 }
 
 
-export const updateUserById = async (req, res) => {
+export const updateUserProfile = async (req, res) => {
     try {
-        const userId = req.params.id
+        const userId = req.tokenData.userId
         const updateData = req.body
+        const newUser = await User.findByIdAndUpdate(userId, updateData, { new: true })
 
-
-        const user = await User.findByIdAndUpdate(userId, updateData, { new: true })
+        if (!updateData) {
+            return res.status(400).json(
+                {
+                    success: true,
+                    message: "No changes detected. User cannot be updated",
+                }
+            )
+        }
 
         res.status(200).json({
             success: true,
             message: "User updated succesfully",
-            data: user
+            data: newUser
         })
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: "User cant be updated",
+            message: "User cant be retrieved",
             error: error
         })
     }
@@ -88,4 +93,29 @@ export const deleteUserById = async (req, res) => {
         })
     }
 }
+
+
+export const updateUserRole = async (req, res) => {
+    try {
+        const userId = req.params.id
+        const newRole = { role: req.body.role }
+
+        const userUpdated = await User.findByIdAndUpdate(userId, newRole, { new: true })
+
+        res.status(200).json({
+            success: true,
+            message: "User's role updated succesfully",
+            data: userUpdated
+        })
+        console.log(2);
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "User's role cant be updated",
+            error: error
+        })
+    }
+}
+
+
 
