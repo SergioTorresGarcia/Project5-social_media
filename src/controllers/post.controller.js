@@ -60,6 +60,40 @@ export const deletePostById = async (req, res) => {
 }
 
 
+export const updatePostById = async (req, res) => {
+    try {
+        const postId = req.params.id
+        const newContent = req.body.content
+
+        if (!newContent) {
+            return res.status(400).json(
+                {
+                    success: true,
+                    message: "No changes detected. Post cannot be updated",
+                }
+            )
+        }
+
+        const postUpdated = await Post.findByIdAndUpdate(postId, newContent, { new: true })
+
+        res.status(200).json({
+            success: true,
+            message: "Post updated successfully",
+            data: postUpdated
+        })
+
+    } catch (error) {
+        res.status(500).json(
+            {
+                success: false,
+                message: "Post cannot be retrieved",
+                error: error.message
+            }
+        )
+    }
+}
+
+
 // export const getPosts = async (req, res) => {
 //     try {
 //         const page = req.query.page || 1
@@ -110,39 +144,6 @@ export const deletePostById = async (req, res) => {
 // }
 
 
-// export const udpateBookById = async (req, res) => {
-//     try {
-//         const updateData = req.body
 
-//         const bookId = req.params.id
-
-//         if (!updateData) {
-//             return res.status(400).json(
-//                 {
-//                     success: true,
-//                     message: "No changes detected. Book cannot be updated",
-//                 }
-//             )
-//         }
-
-//         const bookUpdated = await Book.findByIdAndUpdate(bookId, updateData, { new: true })
-
-//         res.status(200).json(
-//             {
-//                 success: true,
-//                 message: "Book updated successfully",
-//                 data: bookUpdated
-//             }
-//         )
-//     } catch (error) {
-//         res.status(500).json(
-//             {
-//                 success: false,
-//                 message: "Book cannot be retrieved",
-//                 error: error.message
-//             }
-//         )
-//     }
-// }
 
 
