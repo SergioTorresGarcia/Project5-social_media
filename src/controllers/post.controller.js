@@ -92,6 +92,7 @@ export const updatePostById = async (req, res) => {
     }
 }
 
+
 export const getOwnPosts = async (req, res) => {
     try {
         const userId = req.tokenData.userId
@@ -119,6 +120,7 @@ export const getOwnPosts = async (req, res) => {
         )
     }
 }
+
 
 export const getPosts = async (req, res) => {
     try {
@@ -244,8 +246,6 @@ export const likePost = async (req, res) => {
                 data: postLiked.likes,
             });
         }
-
-
 
     } catch (error) {
         res.status(500).json(

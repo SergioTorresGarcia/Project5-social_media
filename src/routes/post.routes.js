@@ -10,7 +10,6 @@ router.put('/:id', auth, updatePostById)            // OK - Updating a post by I
 router.get('/own', auth, getOwnPosts)               // OK - Retrieving own posts
 router.get('/', auth, getPosts)                     // OK - Retrieving all posts
 router.get('/:id', auth, getPostById)               // OK - Retrieving a post by ID
-
 router.put('/like/:id', auth, likePost)             // OK - Liking a post
 
 

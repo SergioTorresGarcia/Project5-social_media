@@ -4,14 +4,14 @@ import User from "../models/User.js";
 
 export const getUsers = async (req, res) => {
     try {
-        // Missing dynamic url search based on query parameters (email)
-        // const emailQuery = req.query.email
-        // const email = email.Like("%" + emailQuery + "%")
+        // Query search based on query parameters (email or username)
+        const param = req.query;
+        const query = param ? param : "";
 
         const page = req.query.page || 1
         const limit = 2
-        const users = await User.find()
-        const usersDisplay = await User.find().skip((Number(page) - 1) * limit).limit(limit)
+        const users = await User.find(query)
+        const usersDisplay = await User.find(query).skip((Number(page) - 1) * limit).limit(limit)
 
         res.status(200).json({
             success: true,
