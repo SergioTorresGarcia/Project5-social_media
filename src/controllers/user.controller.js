@@ -4,6 +4,10 @@ import User from "../models/User.js";
 
 export const getUsers = async (req, res) => {
     try {
+        // Missing dynamic url search based on query parameters (email)
+        // const emailQuery = req.query.email
+        // const email = email.Like("%" + emailQuery + "%")
+
         const page = req.query.page || 1
         const limit = 2
         const users = await User.find()
@@ -14,6 +18,7 @@ export const getUsers = async (req, res) => {
             message: `Total of ${users.length} users found.`,
             data: usersDisplay
         })
+
     } catch (error) {
         res.status(500).json({
             success: false,

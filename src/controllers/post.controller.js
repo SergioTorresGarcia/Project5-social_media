@@ -1,33 +1,32 @@
 import Post from "../models/Post.js"
+import User from "../models/User.js";
 
 
 export const createPost = async (req, res) => {
     try {
-        const { userId, content } = req.body
+        const userId = req.tokenData.userId
+        const content = req.body.content.trim()
 
-        if (!userId || !content) {
-            return res.status(400).json(
-                {
-                    success: false,
-                    message: "UserId and content required"
-                }
-            )
+        const username = User.findById(userId).username
+
+        if (!content || content === ("")) {
+            return res.status(400).json({
+                success: false,
+                message: "Some content required"
+            })
         }
 
-        const newPost = await Post.create(
-            {
-                userId,
-                content
-            }
-        )
+        const newPost = await Post.create({
+            userId,
+            content,
+            username
+        })
 
-        res.status(201).json(
-            {
-                success: true,
-                message: "Post created",
-                data: newPost
-            }
-        )
+        res.status(201).json({
+            success: true,
+            message: "Post created",
+            data: newPost
+        })
     } catch (error) {
         res.status(500).json(
             {
