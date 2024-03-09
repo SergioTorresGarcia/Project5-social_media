@@ -1,5 +1,5 @@
 import Post from "../models/Post.js"
-// import User from "../models/User.js";
+import User from "../models/User.js";
 
 
 export const createPost = async (req, res) => {
@@ -100,7 +100,7 @@ export const getOwnPosts = async (req, res) => {
         const page = req.query.page || 1
         const limit = 2
         const posts = await Post.find({ userId })
-        const ownPosts = await Post.find({ userId }).skip((Number(page) - 1) * limit).limit(limit) //.select('title').select('author');
+        const ownPosts = await Post.find({ userId }).skip((Number(page) - 1) * limit).limit(limit).select('content')
 
         res.status(200).json(
             {
@@ -127,7 +127,7 @@ export const getPosts = async (req, res) => {
         const page = req.query.page || 1
         const limit = 2
         const posts = await Post.find()
-        const allPosts = await Post.find().skip((Number(page) - 1) * limit).limit(limit) //.select('title').select('author');
+        const allPosts = await Post.find().skip((Number(page) - 1) * limit).limit(limit).select('content')
 
         res.status(200).json(
             {
@@ -148,54 +148,29 @@ export const getPosts = async (req, res) => {
     }
 }
 
-// export const getPosts = async (req, res) => {
-//     try {
-//         const page = req.query.page || 1
-//         const limit = 5
-//         const posts = await Post.find()
-//         const postsDisplay = await Post.find().skip((Number(page) - 1) * limit).limit(limit) // .select('content')
 
-//         res.status(200).json(
-//             {
-//                 success: true,
-//                 message: `Total of ${posts.length} posts found.`,
-//                 data: postsDisplay
-//             }
-//         )
-//     } catch (error) {
-//         res.status(500).json(
-//             {
-//                 success: false,
-//                 message: "Post cannot be retrieved",
-//                 error: error.message
-//             }
-//         )
-//     }
-// }
+export const getPostById = async (req, res) => {
+    try {
+        const postId = req.params.id
+        const post = await Post.findById(postId).select('content')
 
-
-// export const getPostById = async (req, res) => {
-//     try {
-//         const bookId = req.params.id
-//         const book = await Book.findById(bookId).select('title').select('author');
-
-//         res.status(200).json(
-//             {
-//                 success: true,
-//                 message: "Book retrieved",
-//                 data: book
-//             }
-//         )
-//     } catch (error) {
-//         res.status(500).json(
-//             {
-//                 success: false,
-//                 message: "Book cannot be retrieved",
-//                 error: error.message
-//             }
-//         )
-//     }
-// }
+        res.status(200).json(
+            {
+                success: true,
+                message: "Post retrieved",
+                data: post
+            }
+        )
+    } catch (error) {
+        res.status(500).json(
+            {
+                success: false,
+                message: "Post cannot be retrieved",
+                error: error.message
+            }
+        )
+    }
+}
 
 
 
