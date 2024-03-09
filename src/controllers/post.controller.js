@@ -127,7 +127,7 @@ export const getPosts = async (req, res) => {
         const page = req.query.page || 1
         const limit = 2
         const posts = await Post.find()
-        const allPosts = await Post.find().skip((Number(page) - 1) * limit).limit(limit).select('content')
+        const allPosts = await Post.find().skip((Number(page) - 1) * limit).limit(limit).select('content').select('userId')
 
         res.status(200).json(
             {
@@ -152,7 +152,11 @@ export const getPosts = async (req, res) => {
 export const getPostById = async (req, res) => {
     try {
         const postId = req.params.id
-        const post = await Post.findById(postId).select('content')
+        const numPosts = await Post.find({ userId })
+        const page = req.query.page || 1
+        const limit = 5
+
+        const post = await Post.findById(postId).skip((Number(page) - 1) * limit).limit(limit).select('content')
 
         res.status(200).json(
             {
@@ -173,6 +177,32 @@ export const getPostById = async (req, res) => {
 }
 
 
+export const getPostByUserId = async (req, res) => {
+    try {
+        const userId = req.params.userId
+        const numPosts = await Post.find({ userId })
+        const page = req.query.page || 1
+        const limit = 5
+
+        const posts = await Post.find({ userId }).skip((Number(page) - 1) * limit).limit(limit).select('content').select('userId')
+
+        res.status(200).json(
+            {
+                success: true,
+                message: `${numPosts.length} post(s) by this user retrieved`,
+                data: posts
+            }
+        )
+    } catch (error) {
+        res.status(500).json(
+            {
+                success: false,
+                message: "Posts cannot be retrieved for this user",
+                error: error.message
+            }
+        )
+    }
+}
 
 
 
