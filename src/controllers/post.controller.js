@@ -1,13 +1,11 @@
 import Post from "../models/Post.js"
-import User from "../models/User.js";
+// import User from "../models/User.js";
 
 
 export const createPost = async (req, res) => {
     try {
         const userId = req.tokenData.userId
         const content = req.body.content.trim()
-
-        const username = User.findById(userId).username
 
         if (!content || content === ("")) {
             return res.status(400).json({
@@ -18,8 +16,7 @@ export const createPost = async (req, res) => {
 
         const newPost = await Post.create({
             userId,
-            content,
-            username
+            content
         })
 
         res.status(201).json({
@@ -39,30 +36,54 @@ export const createPost = async (req, res) => {
 }
 
 
-export const getPosts = async (req, res) => {
+export const deletePostById = async (req, res) => {
     try {
-        const page = req.query.page || 1
-        const limit = 5
-        const posts = await Post.find()
-        const postsDisplay = await Post.find().skip((Number(page) - 1) * limit).limit(limit) // .select('content')
+        const postId = req.params.id
+        const postDeleted = await Post.findOneAndDelete(postId)
 
         res.status(200).json(
             {
                 success: true,
-                message: `Total of ${posts.length} posts found.`,
-                data: postsDisplay
+                message: "Post deleted successfully",
+                data: postDeleted
             }
         )
     } catch (error) {
         res.status(500).json(
             {
                 success: false,
-                message: "Post cannot be retrieved",
+                message: "Post cannot be deleted",
                 error: error.message
             }
         )
     }
 }
+
+
+// export const getPosts = async (req, res) => {
+//     try {
+//         const page = req.query.page || 1
+//         const limit = 5
+//         const posts = await Post.find()
+//         const postsDisplay = await Post.find().skip((Number(page) - 1) * limit).limit(limit) // .select('content')
+
+//         res.status(200).json(
+//             {
+//                 success: true,
+//                 message: `Total of ${posts.length} posts found.`,
+//                 data: postsDisplay
+//             }
+//         )
+//     } catch (error) {
+//         res.status(500).json(
+//             {
+//                 success: false,
+//                 message: "Post cannot be retrieved",
+//                 error: error.message
+//             }
+//         )
+//     }
+// }
 
 
 // export const getPostById = async (req, res) => {
@@ -125,26 +146,3 @@ export const getPosts = async (req, res) => {
 // }
 
 
-// export const deleteBookById = async (req, res) => {
-//     try {
-//         const bookId = req.params.id
-
-//         const bookDeleted = await Book.findOneAndDelete(bookId)
-
-//         res.status(200).json(
-//             {
-//                 success: true,
-//                 message: "Book deleted successfully",
-//                 data: bookDeleted
-//             }
-//         )
-//     } catch (error) {
-//         res.status(500).json(
-//             {
-//                 success: false,
-//                 message: "Book cannot be deleted",
-//                 error: error.message
-//             }
-//         )
-//     }
-// } 
