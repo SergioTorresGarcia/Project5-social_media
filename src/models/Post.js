@@ -1,16 +1,16 @@
 import { Schema, model } from "mongoose"
 
-const AuthorSchema = new Schema(
+const PostSchema = new Schema(
     {
-        name: {
+        userId: {
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+            required: true,
+        },
+        content: {
             type: String,
             required: true,
         },
-        nationality: {
-            type: String,
-            required: true,
-        },
-
     },
     {
         timestamps: true,
@@ -18,6 +18,6 @@ const AuthorSchema = new Schema(
     }
 )
 
-const Author = model("Author", AuthorSchema)
+const Post = model("Post", PostSchema)
 
-export default Author
+export default Post

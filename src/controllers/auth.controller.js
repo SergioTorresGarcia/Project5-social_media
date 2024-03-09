@@ -6,9 +6,22 @@ import User from "../models/User.js";
 
 export const register = async (req, res) => {
     try {
-        const email = req.body.email
-        const password = req.body.password
+        const { username, email, password } = req.body
 
+        if (!username || !email || !password) {
+            return res.status(400).json({
+                success: false,
+                message: "All fields are required"
+            })
+        }
+
+        const validEmail = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
+        if (!validEmail.test(email)) {
+            return res.status(400).json({
+                success: false,
+                message: "format email invalid"
+            })
+        }
 
         if (password.length < 6 || password.length > 10) {
             return res.status(400).json({
@@ -16,23 +29,14 @@ export const register = async (req, res) => {
                 message: "Password must contain between 6 and 10 characters"
             })
         }
-
-
-        const validEmail = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
-        if (!validEmail.test(email)) {
-            return res.status(400).json(
-                {
-                    success: false,
-                    message: "format email invalid"
-                }
-            )
-        }
         const passwordEncrypted = bcrypt.hashSync(password, 5)
 
         const newUser = await User.create({
-            email: email,
+            username,
+            email,
             password: passwordEncrypted
         })
+
         res.status(201).json({
             success: true,
             message: "User registered succesfully",
@@ -110,7 +114,6 @@ export const login = async (req, res) => {
         })
 
     } catch (error) {
-
         res.status(500).json({
             success: false,
             message: "User cant be logged",
