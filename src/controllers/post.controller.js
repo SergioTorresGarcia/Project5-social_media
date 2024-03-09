@@ -93,6 +93,60 @@ export const updatePostById = async (req, res) => {
     }
 }
 
+export const getOwnPosts = async (req, res) => {
+    try {
+        const userId = req.tokenData.userId
+
+        const page = req.query.page || 1
+        const limit = 2
+        const posts = await Post.find({ userId })
+        const ownPosts = await Post.find({ userId }).skip((Number(page) - 1) * limit).limit(limit) //.select('title').select('author');
+
+        res.status(200).json(
+            {
+                success: true,
+                message: `${posts.length} posts retrieved of yours`,
+                data: ownPosts
+            }
+        )
+
+    } catch (error) {
+        res.status(500).json(
+            {
+                success: false,
+                message: "Posts cannot be retrieved",
+                error: error.message
+            }
+        )
+    }
+}
+
+export const getPosts = async (req, res) => {
+    try {
+
+        const page = req.query.page || 1
+        const limit = 2
+        const posts = await Post.find()
+        const allPosts = await Post.find().skip((Number(page) - 1) * limit).limit(limit) //.select('title').select('author');
+
+        res.status(200).json(
+            {
+                success: true,
+                message: `${posts.length} posts retrieved`,
+                data: allPosts
+            }
+        )
+
+    } catch (error) {
+        res.status(500).json(
+            {
+                success: false,
+                message: "Posts cannot be retrieved",
+                error: error.message
+            }
+        )
+    }
+}
 
 // export const getPosts = async (req, res) => {
 //     try {
