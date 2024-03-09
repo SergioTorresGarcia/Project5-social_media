@@ -1,5 +1,4 @@
 import Post from "../models/Post.js"
-import User from "../models/User.js";
 
 
 export const createPost = async (req, res) => {
@@ -125,9 +124,9 @@ export const getPosts = async (req, res) => {
     try {
 
         const page = req.query.page || 1
-        const limit = 2
+        const limit = 5
         const posts = await Post.find()
-        const allPosts = await Post.find().skip((Number(page) - 1) * limit).limit(limit).select('content').select('userId')
+        const allPosts = await Post.find().skip((Number(page) - 1) * limit).limit(limit).select('content').select('likes').select('userId')
 
         res.status(200).json(
             {
@@ -205,4 +204,57 @@ export const getPostByUserId = async (req, res) => {
 }
 
 
+export const likePost = async (req, res) => {
+    try {
+        const userId = req.tokenData.userId;
+        const postId = req.params.id;
+        console.log(userId);
+        const post = await Post.findById(postId);
+
+        if (!post) {
+            return res.status(404).json({
+                success: false,
+                message: 'Post not found',
+            });
+        }
+
+        const likeList = post.likes;
+
+        // Check if the user has already liked the post
+        if (likeList.includes(userId)) {
+            likeList.remove(req.tokenData.userId);
+            post.likes = likeList;
+
+            const postLiked = await post.save();
+            console.log(postLiked.likes);
+            res.status(200).json({
+                success: true,
+                message: `Like removed. This post has ${likeList.length} likes`,
+                data: postLiked.likes,
+            });
+        } else {
+            likeList.push(req.tokenData.userId);
+            post.likes = likeList;
+
+            const postLiked = await post.save();
+            console.log(postLiked.likes);
+            res.status(200).json({
+                success: true,
+                message: `Post liked. This post has ${likeList.length} likes`,
+                data: postLiked.likes,
+            });
+        }
+
+
+
+    } catch (error) {
+        res.status(500).json(
+            {
+                success: false,
+                message: "Like was not added or taken",
+                error: error.message
+            }
+        )
+    }
+}
 

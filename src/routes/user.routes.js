@@ -9,13 +9,13 @@ import { isSuperAdmin } from "../middlewares/isSuperAdmin.js";
 const router = Router();
 
 
-router.get('/', auth, isSuperAdmin, getUsers) // '/?email=ejemplo@mail.com' (EXTRA)
-router.get('/profile', auth, getUserProfile)
-router.put('/profile', auth, updateUserProfile)
-router.delete('/:id', auth, isSuperAdmin, deleteUserById) // (EXTRA)
-router.put('/:id/role', auth, isSuperAdmin, updateUserRole) // (EXTRA)
+router.get('/', auth, isSuperAdmin, getUsers)               // OK - Mising dinamic query search '/?email=ejemplo@mail.com' (EXTRA)
+router.get('/profile', auth, getUserProfile)                // OK
+router.put('/profile', auth, updateUserProfile)             // OK
+router.delete('/:id', auth, isSuperAdmin, deleteUserById)   // OK - (EXTRA)
+router.put('/:id/role', auth, isSuperAdmin, updateUserRole) // OK - (EXTRA)
 
-router.get('/posts/:userId', auth, getPostByUserId)       //  - Retrieving posts of a specific user
+router.get('/posts/:userId', auth, getPostByUserId)         // OK - Retrieving posts of a specific user
 
 
 export default router;
