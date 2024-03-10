@@ -20,11 +20,7 @@ export const getUsers = async (req, res) => {
         })
 
     } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "Users cant be retrieved",
-            error: error
-        })
+        handleError(res, "Users cant be retrieved")
     }
 }
 
@@ -40,11 +36,7 @@ export const getUserProfile = async (req, res) => {
             data: user
         })
     } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "User cant be retrieved",
-            error: error
-        })
+        handleError(res, "User cant be retrieved")
     }
 }
 
@@ -56,12 +48,7 @@ export const updateUserProfile = async (req, res) => {
         const newUser = await User.findByIdAndUpdate(userId, updateData, { new: true })
 
         if (!updateData) {
-            return res.status(400).json(
-                {
-                    success: true,
-                    message: "No changes detected. User cannot be updated",
-                }
-            )
+            handleError(res, "No changes detected. User cannot be updated", 400)
         }
 
         res.status(200).json({
@@ -70,11 +57,7 @@ export const updateUserProfile = async (req, res) => {
             data: newUser
         })
     } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "User cant be retrieved",
-            error: error
-        })
+        handleError(res, "User cant be retrieved")
     }
 }
 
@@ -82,7 +65,6 @@ export const updateUserProfile = async (req, res) => {
 export const deleteUserById = async (req, res) => {
     try {
         const userId = req.params.id
-
         const userDeleted = await User.findByIdAndDelete(userId)
 
         res.status(200).json({
@@ -91,11 +73,7 @@ export const deleteUserById = async (req, res) => {
             data: userDeleted
         })
     } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "User cant be deleted",
-            error: error
-        })
+        handleError(res, "User cant be deleted")
     }
 }
 
@@ -114,13 +92,6 @@ export const updateUserRole = async (req, res) => {
         })
         console.log(2);
     } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "User's role cant be updated",
-            error: error
-        })
+        handleError(res, "User's role cant be updated")
     }
 }
-
-
-
