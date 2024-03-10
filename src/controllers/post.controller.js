@@ -1,5 +1,6 @@
 import Post from "../models/Post.js"
 import { handleError } from "../utils/handleError.js";
+import { handleSuccess } from "../utils/handleSuccess.js";
 
 
 export const createPost = async (req, res) => {
@@ -16,11 +17,7 @@ export const createPost = async (req, res) => {
             content
         })
 
-        res.status(201).json({
-            success: true,
-            message: "Post created",
-            data: newPost
-        })
+        handleSuccess(res, "Post created", newPost, 201)
     } catch (error) {
         handleError(res, "Post cannot be created")
     }
@@ -32,13 +29,7 @@ export const deletePostById = async (req, res) => {
         const postId = req.params.id
         const postDeleted = await Post.findOneAndDelete(postId)
 
-        res.status(200).json(
-            {
-                success: true,
-                message: "Post deleted successfully",
-                data: postDeleted
-            }
-        )
+        handleSuccess(res, "Post deleted successfully", postDeleted)
     } catch (error) {
         handleError(res, "Post cannot be deleted")
     }
@@ -56,12 +47,7 @@ export const updatePostById = async (req, res) => {
 
         const postUpdated = await Post.findByIdAndUpdate(postId, newContent, { new: true })
 
-        res.status(200).json({
-            success: true,
-            message: "Post updated successfully",
-            data: postUpdated
-        })
-
+        handleSuccess(res, "Post updated successfully", postUpdated)
     } catch (error) {
         handleError(res, "Post cannot be retrieved")
     }
@@ -77,13 +63,7 @@ export const getOwnPosts = async (req, res) => {
         const posts = await Post.find({ userId })
         const ownPosts = await Post.find({ userId }).skip((Number(page) - 1) * limit).limit(limit).select('content')
 
-        res.status(200).json(
-            {
-                success: true,
-                message: `${posts.length} posts retrieved of yours`,
-                data: ownPosts
-            }
-        )
+        handleSuccess(res, `${posts.length} posts retrieved of yours`, ownPosts)
     } catch (error) {
         handleError(res, "Posts cannot be retrieved")
     }
@@ -97,14 +77,7 @@ export const getPosts = async (req, res) => {
         const posts = await Post.find()
         const allPosts = await Post.find().skip((Number(page) - 1) * limit).limit(limit).select('content').select('likes').select('userId')
 
-        res.status(200).json(
-            {
-                success: true,
-                message: `${posts.length} posts retrieved`,
-                data: allPosts
-            }
-        )
-
+        handleSuccess(res, `${posts.length} posts retrieved`, allPosts)
     } catch (error) {
         handleError(res, "Posts cannot be retrieved")
     }
@@ -119,13 +92,7 @@ export const getPostById = async (req, res) => {
 
         const post = await Post.findById(postId).skip((Number(page) - 1) * limit).limit(limit).select('content')
 
-        res.status(200).json(
-            {
-                success: true,
-                message: "Post retrieved",
-                data: post
-            }
-        )
+        handleSuccess(res, "Post retrieved", post)
     } catch (error) {
         handleError(res, "Post cannot be retrieved")
     }
@@ -141,13 +108,7 @@ export const getPostByUserId = async (req, res) => {
 
         const posts = await Post.find({ userId }).skip((Number(page) - 1) * limit).limit(limit).select('content').select('userId')
 
-        res.status(200).json(
-            {
-                success: true,
-                message: `${numPosts.length} post(s) by this user retrieved`,
-                data: posts
-            }
-        )
+        handleSuccess(res, `${numPosts.length} post(s) by this user retrieved`, posts)
     } catch (error) {
         handleError(res, "Post cannot be retrieved for this user")
     }
@@ -174,22 +135,14 @@ export const likePost = async (req, res) => {
 
             const postLiked = await post.save();
 
-            res.status(200).json({
-                success: true,
-                message: `Like removed. This post has ${likeList.length} likes`,
-                data: postLiked.likes
-            });
+            handleSuccess(res, `Like removed. This post has ${likeList.length} likes`, postLiked.likes)
         } else {
             likeList.push(req.tokenData.userId); // remove like
             post.likes = likeList;
 
             const postLiked = await post.save();
 
-            res.status(200).json({
-                success: true,
-                message: `Post liked. This post has ${likeList.length} likes`,
-                data: postLiked.likes
-            });
+            handleSuccess(res, `Post liked. This post has ${likeList.length} likes`, postLiked.likes)
         }
     } catch (error) {
         handleError(res, "Like was not added or taken")
