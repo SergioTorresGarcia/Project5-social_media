@@ -9,7 +9,7 @@ import { isSuperAdmin } from "../middlewares/isSuperAdmin.js";
 const router = Router();
 
 
-router.get('/', auth, isSuperAdmin, getUsers)               // OK - Mising dinamic query search '/?email=ejemplo@mail.com' (EXTRA)
+router.get('/', auth, isSuperAdmin, getUsers)               // OK - (EXTRA) there is query search, but it is not dynamic 
 router.get('/profile', auth, getUserProfile)                // OK
 router.put('/profile', auth, updateUserProfile)             // OK
 router.delete('/:id', auth, isSuperAdmin, deleteUserById)   // OK - (EXTRA)

@@ -4,7 +4,7 @@ import User from "../models/User.js";
 
 export const getUsers = async (req, res) => {
     try {
-        // Query search based on query parameters (email or username)
+        // dynamic url search based on query parameters (email or username)
         const param = req.query;
         const query = param ? param : "";
 
