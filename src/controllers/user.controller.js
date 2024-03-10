@@ -13,11 +13,7 @@ export const getUsers = async (req, res) => {
         const users = await User.find(query)
         const usersDisplay = await User.find(query).skip((Number(page) - 1) * limit).limit(limit)
 
-        res.status(200).json({
-            success: true,
-            message: `Total of ${users.length} users found.`,
-            data: usersDisplay
-        })
+        handleSuccess(res, `Total of ${users.length} users found.`, usersDisplay)
 
     } catch (error) {
         handleError(res, "Users cant be retrieved")
@@ -30,11 +26,7 @@ export const getUserProfile = async (req, res) => {
         const userId = req.tokenData.userId
         const user = await User.findById(userId)
 
-        res.status(200).json({
-            success: true,
-            message: "User retrieved succesfully",
-            data: user
-        })
+        handleSuccess(res, "User retrieved succesfully", user)
     } catch (error) {
         handleError(res, "User cant be retrieved")
     }
@@ -51,11 +43,7 @@ export const updateUserProfile = async (req, res) => {
             handleError(res, "No changes detected. User cannot be updated", 400)
         }
 
-        res.status(200).json({
-            success: true,
-            message: "User updated succesfully",
-            data: newUser
-        })
+        handleSuccess(res, "User updated succesfully", newUser)
     } catch (error) {
         handleError(res, "User cant be retrieved")
     }
@@ -67,11 +55,7 @@ export const deleteUserById = async (req, res) => {
         const userId = req.params.id
         const userDeleted = await User.findByIdAndDelete(userId)
 
-        res.status(200).json({
-            success: true,
-            message: "User deleted succesfully",
-            data: userDeleted
-        })
+        handleSuccess(res, "User deleted succesfully", userDeleted)
     } catch (error) {
         handleError(res, "User cant be deleted")
     }
@@ -85,12 +69,7 @@ export const updateUserRole = async (req, res) => {
 
         const userUpdated = await User.findByIdAndUpdate(userId, newRole, { new: true })
 
-        res.status(200).json({
-            success: true,
-            message: "User's role updated succesfully",
-            data: userUpdated
-        })
-        console.log(2);
+        handleSuccess(res, "User's role updated succesfully", userUpdated)
     } catch (error) {
         handleError(res, "User's role cant be updated")
     }
