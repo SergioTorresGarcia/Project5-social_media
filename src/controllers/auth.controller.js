@@ -5,6 +5,7 @@ import User from "../models/User.js";
 import { isValidEmail } from "../helpers/emailValidation.js";
 import { isValidPassword } from "../helpers/passwordValidation.js";
 import { handleError } from "../utils/handleError.js";
+import { handleSuccess } from "../utils/handleSuccess.js";
 
 
 export const register = async (req, res) => {
@@ -31,11 +32,7 @@ export const register = async (req, res) => {
             password
         })
 
-        res.status(201).json({
-            success: true,
-            message: "User registered succesfully",
-            data: newUser
-        })
+        handleSuccess(res, "User registered succesfully", newUser, 201)
     } catch (error) {
         handleError(res, "User cant be registered")
     }
@@ -78,11 +75,8 @@ export const login = async (req, res) => {
             }
         )
 
-        res.status(200).json({
-            success: true,
-            message: "User logged succesfully",
-            token: token //MOSTRAMOS EL TOKEN DE MANERA TEMPORAL PARA PODER PROBAR CON ÉL OTRA FUNCIONALIDADES
-        })
+        handleSuccess(res, "User logged succesfully", token)
+        //MOSTRAMOS EL TOKEN DE MANERA TEMPORAL PARA PODER PROBAR CON ÉL OTRA FUNCIONALIDADES
     } catch (error) {
         handleError(res, "User cant be logged")
     }
