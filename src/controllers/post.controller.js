@@ -1,4 +1,5 @@
 import Post from "../models/Post.js"
+import { handleError } from "../utils/handleError.js";
 
 
 export const createPost = async (req, res) => {
@@ -7,10 +8,7 @@ export const createPost = async (req, res) => {
         const content = req.body.content.trim()
 
         if (!content || content === ("")) {
-            return res.status(400).json({
-                success: false,
-                message: "Some content required"
-            })
+            handleError(res, "Some content required", 400)
         }
 
         const newPost = await Post.create({
@@ -24,13 +22,7 @@ export const createPost = async (req, res) => {
             data: newPost
         })
     } catch (error) {
-        res.status(500).json(
-            {
-                success: false,
-                message: "Post cannot be created",
-                error: error.message
-            }
-        )
+        handleError(res, "Post cannot be created")
     }
 }
 
@@ -48,13 +40,7 @@ export const deletePostById = async (req, res) => {
             }
         )
     } catch (error) {
-        res.status(500).json(
-            {
-                success: false,
-                message: "Post cannot be deleted",
-                error: error.message
-            }
-        )
+        handleError(res, "Post cannot be deleted")
     }
 }
 
@@ -65,12 +51,7 @@ export const updatePostById = async (req, res) => {
         const newContent = req.body.content
 
         if (!newContent) {
-            return res.status(400).json(
-                {
-                    success: true,
-                    message: "No changes detected. Post cannot be updated",
-                }
-            )
+            handleError(res, "No changes detected. Post cannot be updated", 400)
         }
 
         const postUpdated = await Post.findByIdAndUpdate(postId, newContent, { new: true })
@@ -82,13 +63,7 @@ export const updatePostById = async (req, res) => {
         })
 
     } catch (error) {
-        res.status(500).json(
-            {
-                success: false,
-                message: "Post cannot be retrieved",
-                error: error.message
-            }
-        )
+        handleError(res, "Post cannot be retrieved")
     }
 }
 
@@ -109,22 +84,14 @@ export const getOwnPosts = async (req, res) => {
                 data: ownPosts
             }
         )
-
     } catch (error) {
-        res.status(500).json(
-            {
-                success: false,
-                message: "Posts cannot be retrieved",
-                error: error.message
-            }
-        )
+        handleError(res, "Posts cannot be retrieved")
     }
 }
 
 
 export const getPosts = async (req, res) => {
     try {
-
         const page = req.query.page || 1
         const limit = 5
         const posts = await Post.find()
@@ -139,13 +106,7 @@ export const getPosts = async (req, res) => {
         )
 
     } catch (error) {
-        res.status(500).json(
-            {
-                success: false,
-                message: "Posts cannot be retrieved",
-                error: error.message
-            }
-        )
+        handleError(res, "Posts cannot be retrieved")
     }
 }
 
@@ -153,7 +114,6 @@ export const getPosts = async (req, res) => {
 export const getPostById = async (req, res) => {
     try {
         const postId = req.params.id
-        const numPosts = await Post.find({ userId })
         const page = req.query.page || 1
         const limit = 5
 
@@ -167,13 +127,7 @@ export const getPostById = async (req, res) => {
             }
         )
     } catch (error) {
-        res.status(500).json(
-            {
-                success: false,
-                message: "Post cannot be retrieved",
-                error: error.message
-            }
-        )
+        handleError(res, "Post cannot be retrieved")
     }
 }
 
@@ -195,13 +149,7 @@ export const getPostByUserId = async (req, res) => {
             }
         )
     } catch (error) {
-        res.status(500).json(
-            {
-                success: false,
-                message: "Posts cannot be retrieved for this user",
-                error: error.message
-            }
-        )
+        handleError(res, "Post cannot be retrieved for this user")
     }
 }
 
@@ -210,51 +158,40 @@ export const likePost = async (req, res) => {
     try {
         const userId = req.tokenData.userId;
         const postId = req.params.id;
-        console.log(userId);
+
         const post = await Post.findById(postId);
 
         if (!post) {
-            return res.status(404).json({
-                success: false,
-                message: 'Post not found',
-            });
+            handleError(res, "Post not found", 404)
         }
 
         const likeList = post.likes;
 
         // Check if the user has already liked the post
         if (likeList.includes(userId)) {
-            likeList.remove(req.tokenData.userId);
+            likeList.remove(req.tokenData.userId); // add like
             post.likes = likeList;
 
             const postLiked = await post.save();
-            console.log(postLiked.likes);
+
             res.status(200).json({
                 success: true,
                 message: `Like removed. This post has ${likeList.length} likes`,
-                data: postLiked.likes,
+                data: postLiked.likes
             });
         } else {
-            likeList.push(req.tokenData.userId);
+            likeList.push(req.tokenData.userId); // remove like
             post.likes = likeList;
 
             const postLiked = await post.save();
-            console.log(postLiked.likes);
+
             res.status(200).json({
                 success: true,
                 message: `Post liked. This post has ${likeList.length} likes`,
-                data: postLiked.likes,
+                data: postLiked.likes
             });
         }
-
     } catch (error) {
-        res.status(500).json(
-            {
-                success: false,
-                message: "Like was not added or taken",
-                error: error.message
-            }
-        )
+        handleError(res, "Like was not added or taken")
     }
 }
-
