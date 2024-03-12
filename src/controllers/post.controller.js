@@ -115,7 +115,7 @@ export const getPostByUserId = async (req, res) => {
 }
 
 
-export const likePost = async (req, res) => {
+export const likePost = async (req, res) => { // TO-DO: Post.update & User.update ??? para controlar likes (ids y usernames)
     try {
         const userId = req.tokenData.userId;
         const postId = req.params.id;
