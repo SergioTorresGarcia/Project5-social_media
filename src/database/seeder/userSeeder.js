@@ -55,11 +55,11 @@ export const fakeUserSeeder = async (numberOfUsers) => {
         let last;
         let fakeUser;
         for (let i = 0; i < (numberOfUsers); i++) {
-            let numId =
-                first = faker.person.firstName()
+            let numId = (`${i + 4}`).padStart(24, '0')
+            first = faker.person.firstName()
             last = faker.person.lastName()
             fakeUser = new User({
-                _id: `00000000000000000000000${i + 4}`,
+                _id: numId,
                 username: `${first}_${last}`,
                 email: `${first}.${last}@mail.com`,
                 password: bcrypt.hashSync("123456", 8),
