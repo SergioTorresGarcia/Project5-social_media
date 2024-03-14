@@ -6,13 +6,12 @@ import { handleSuccess } from "../utils/handleSuccess.js";
 export const getUsers = async (req, res) => {
     try {
         // dynamic url search based on query parameters (email or username)
-        const param = req.query;
-        const query = param ? param : "";
+        const query = req.query;
 
-        const page = req.query.page || 1
-        const limit = 2
+
+
         const users = await User.find(query)
-        const usersDisplay = await User.find(query).skip((Number(page) - 1) * limit).limit(limit)
+        const usersDisplay = await User.find(query)
 
         handleSuccess(res, `Total of ${users.length} users found.`, usersDisplay)
 

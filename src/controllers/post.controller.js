@@ -57,12 +57,13 @@ export const updatePostById = async (req, res) => {
 export const getOwnPosts = async (req, res) => {
     try {
         const userId = req.tokenData.userId
-
+        console.log(0, userId);
         const page = req.query.page || 1
         const limit = 2
         const posts = await Post.find({ userId })
-        const ownPosts = await Post.find({ userId }).skip((Number(page) - 1) * limit).limit(limit).select('content')
-
+        const ownPosts = await Post.find({ userId }) //.skip((Number(page) - 1) * limit).limit(limit).select('content')
+        console.log(1, posts);
+        console.log(2, ownPosts);
         handleSuccess(res, `${posts.length} posts retrieved of yours`, ownPosts)
     } catch (error) {
         handleError(res, "Posts cannot be retrieved")
@@ -106,7 +107,8 @@ export const getPostByUserId = async (req, res) => {
         const page = req.query.page || 1
         const limit = 5
 
-        const posts = await Post.find({ userId }).skip((Number(page) - 1) * limit).limit(limit).select('content').select('userId')
+
+        const posts = await Post.find({ userId }).skip((Number(page) - 1) * limit).limit(limit).select('content').select('userId').select('likes').select('likesCount')
 
         handleSuccess(res, `${numPosts.length} post(s) by this user retrieved`, posts)
     } catch (error) {
@@ -117,7 +119,7 @@ export const getPostByUserId = async (req, res) => {
 
 export const likePost = async (req, res) => { // TO-DO: Post.update & User.update ??? para controlar likes (ids y usernames)
     try {
-        const userId = req.tokenData.userId;
+        const username = req.tokenData.username;
         const postId = req.params.id;
 
         const post = await Post.findById(postId);
@@ -129,20 +131,21 @@ export const likePost = async (req, res) => { // TO-DO: Post.update & User.updat
         const likeList = post.likes;
 
         // Check if the user has already liked the post
-        if (likeList.includes(userId)) {
-            likeList.remove(req.tokenData.userId); // add like
-            post.likes = likeList;
-
+        if (likeList.includes(username)) {
+            likeList.remove(req.tokenData.username); // add like
+            const count = likeList.length;
+            post.likesCount = count
             const postLiked = await post.save();
 
-            handleSuccess(res, `Like removed. This post has ${likeList.length} likes`, postLiked.likes)
+            handleSuccess(res, `Like removed. This post has ${count} likes`, postLiked.likes)
         } else {
-            likeList.push(req.tokenData.userId); // remove like
+            likeList.push(req.tokenData.username); // remove like
             post.likes = likeList;
-
+            const count = likeList.length;
+            post.likesCount = count
             const postLiked = await post.save();
 
-            handleSuccess(res, `Post liked. This post has ${likeList.length} likes`, postLiked.likes)
+            handleSuccess(res, `Post liked. This post has ${count} likes`, postLiked.likes)
         }
     } catch (error) {
         handleError(res, "Like was not added or taken")
