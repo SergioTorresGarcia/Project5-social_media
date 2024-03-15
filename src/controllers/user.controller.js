@@ -5,13 +5,21 @@ import { handleSuccess } from "../utils/handleSuccess.js";
 
 export const getUsers = async (req, res) => {
     try {
-        // dynamic url search based on query parameters (email or username)
-        const query = req.query;
+        let queryList = {}; // Initialize an empty query object
 
+        // Add query parameters for username and email (if they exist)
+        if (req.query.username) {
+            queryList.username = req.query.username;
+        }
+        if (req.query.email) {
+            queryList.email = req.query.email;
+        }
 
+        const page = req.query.page || 1
 
-        const users = await User.find(query)
-        const usersDisplay = await User.find(query)
+        const limit = 5
+        const users = await User.find(queryList)
+        const usersDisplay = await User.find(queryList).skip((Number(page) - 1) * limit).limit(limit)
 
         handleSuccess(res, `Total of ${users.length} users found.`, usersDisplay)
 
