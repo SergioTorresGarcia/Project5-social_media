@@ -91,7 +91,7 @@ export const getPostById = async (req, res) => {
         const page = req.query.page || 1
         const limit = 5
 
-        const post = await Post.findById(postId).skip((Number(page) - 1) * limit).limit(limit).select('content')
+        const post = await Post.findById(postId).skip((Number(page) - 1) * limit).limit(limit).select('content').select('likesCount').select('likes')
 
         handleSuccess(res, "Post retrieved", post)
     } catch (error) {

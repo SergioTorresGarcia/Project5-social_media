@@ -32,9 +32,10 @@ export const getUsers = async (req, res) => {
 export const getUserProfile = async (req, res) => {
     try {
         const userId = req.tokenData.userId
+        const userName = req.tokenData.username
         const user = await User.findById(userId)
 
-        handleSuccess(res, "User retrieved succesfully", user)
+        handleSuccess(res, `Hi ${userName}, your profile is been retrieved succesfully`, user)
     } catch (error) {
         handleError(res, "User cant be retrieved")
     }

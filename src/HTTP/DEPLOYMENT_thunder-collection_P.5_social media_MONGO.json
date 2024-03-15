@@ -1,0 +1,363 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "P.5_social media_MONGO_deployed",
+    "dateExported": "2024-03-15T23:15:37.775Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "_id": "ea5a815e-f9dc-44d4-8c0a-e05f94ecb879",
+            "name": "1- Auth",
+            "containerId": "",
+            "created": "2024-03-15T22:27:30.971Z",
+            "sortNum": 5000
+        },
+        {
+            "_id": "fc1f89d7-ae67-4ffc-8dca-9dbc3e438f01",
+            "name": "2 - User",
+            "containerId": "",
+            "created": "2024-03-15T22:27:30.972Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "7280d50d-8cff-421c-b220-ed8fd0b4e25f",
+            "name": "3 - Post",
+            "containerId": "",
+            "created": "2024-03-15T22:27:30.973Z",
+            "sortNum": 30000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "d3afc7cb-170e-43aa-b00e-9b106c5443e4",
+            "colId": "56bca936-77b9-436f-a4c8-9448de98c0b6",
+            "containerId": "ea5a815e-f9dc-44d4-8c0a-e05f94ecb879",
+            "name": "REGISTER",
+            "url": "https://project5-dev-mzdz.2.ie-1.fl0.io/api/auth/register",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-03-15T22:27:30.972Z",
+            "modified": "2024-03-15T22:27:30.972Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"username\": \"sergio\",\n  \"email\":\"sergio@mail.com\",\n  \"password\": \"123456\"\n}",
+                "form": []
+            },
+            "reqType": "post",
+            "tests": []
+        },
+        {
+            "_id": "e5849204-3b0d-452b-a7f6-1afdc8311d94",
+            "colId": "56bca936-77b9-436f-a4c8-9448de98c0b6",
+            "containerId": "ea5a815e-f9dc-44d4-8c0a-e05f94ecb879",
+            "name": "LOGIN",
+            "url": "https://project5-dev-mzdz.2.ie-1.fl0.io/api/auth/login",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-03-15T22:27:30.973Z",
+            "modified": "2024-03-15T22:27:30.973Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\":\"superadmin@superadmin.com\",\n  \"password\": \"123456\"\n}",
+                "form": []
+            },
+            "reqType": "post",
+            "tests": []
+        },
+        {
+            "_id": "ddf8167a-2f1e-4287-95e0-cf8acee60c3b",
+            "colId": "56bca936-77b9-436f-a4c8-9448de98c0b6",
+            "containerId": "fc1f89d7-ae67-4ffc-8dca-9dbc3e438f01",
+            "name": "GET ALL USERS",
+            "url": "https://project5-dev-mzdz.2.ie-1.fl0.io/api/users",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2024-03-15T22:27:30.974Z",
+            "modified": "2024-03-15T22:50:57.590Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "username",
+                    "value": "AdminUser",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "email",
+                    "value": "user@user.com",
+                    "isDisabled": true,
+                    "isPath": false
+                }
+            ],
+            "reqType": "get",
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlN1cGVyQWRtaW4iLCJ1c2VySWQiOiIwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDEiLCJyb2xlTmFtZSI6InN1cGVyX2FkbWluIiwiaWF0IjoxNzEwNTQxOTY2LCJleHAiOjE3MTEyNjE5NjZ9.xSeOsgsSzoggoYaiheKdu_r4ybBZHgkY1UD1UJAjkaE"
+            },
+            "tests": []
+        },
+        {
+            "_id": "684bf377-ced8-4a17-8dbd-e7a31ce79744",
+            "colId": "56bca936-77b9-436f-a4c8-9448de98c0b6",
+            "containerId": "fc1f89d7-ae67-4ffc-8dca-9dbc3e438f01",
+            "name": "GET USER's PROFILE",
+            "url": "https://project5-dev-mzdz.2.ie-1.fl0.io/api/users/profile",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2024-03-15T22:27:30.975Z",
+            "modified": "2024-03-15T22:44:12.334Z",
+            "headers": [],
+            "params": [],
+            "reqType": "get",
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlN1cGVyQWRtaW4iLCJ1c2VySWQiOiIwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDEiLCJyb2xlTmFtZSI6InN1cGVyX2FkbWluIiwiaWF0IjoxNzEwNTQxOTY2LCJleHAiOjE3MTEyNjE5NjZ9.xSeOsgsSzoggoYaiheKdu_r4ybBZHgkY1UD1UJAjkaE"
+            },
+            "tests": []
+        },
+        {
+            "_id": "5c489ef5-8f41-4301-ae39-3c09058223eb",
+            "colId": "56bca936-77b9-436f-a4c8-9448de98c0b6",
+            "containerId": "fc1f89d7-ae67-4ffc-8dca-9dbc3e438f01",
+            "name": "UPDATE USER's PROFILE",
+            "url": "https://project5-dev-mzdz.2.ie-1.fl0.io/api/users/profile",
+            "method": "PUT",
+            "sortNum": 50000,
+            "created": "2024-03-15T22:27:30.976Z",
+            "modified": "2024-03-15T22:49:16.220Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"username\": \"AnotherName\"\n}",
+                "form": []
+            },
+            "reqType": "put",
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWVjNzMzZjk3YTkxNmIxZWM3YjE2ZWIiLCJyb2xlTmFtZSI6ImFkbWluIiwiaWF0IjoxNzA5OTk1NjI2LCJleHAiOjE3MTA3MTU2MjZ9.OmCCz4ufLMgklzvV-B5XT8LEFTUk0Q1KxJKNd1lW7X4"
+            },
+            "tests": []
+        },
+        {
+            "_id": "a8a65309-1e05-4969-b2de-cc9c50995d93",
+            "colId": "56bca936-77b9-436f-a4c8-9448de98c0b6",
+            "containerId": "fc1f89d7-ae67-4ffc-8dca-9dbc3e438f01",
+            "name": "UPDATE USER's ROLE",
+            "url": "https://project5-dev-mzdz.2.ie-1.fl0.io/api/users/000000000000000000000002/role",
+            "method": "PUT",
+            "sortNum": 55000,
+            "created": "2024-03-15T22:27:30.977Z",
+            "modified": "2024-03-15T22:54:09.114Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"role\": \"user\"\n}",
+                "form": []
+            },
+            "reqType": "put",
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWVjNjBiMmQyZjI1MWFiNGQ1NmYwMmEiLCJyb2xlTmFtZSI6InN1cGVyX2FkbWluIiwiaWF0IjoxNzA5OTk2Mzg1LCJleHAiOjE3MTA3MTYzODV9.KunLHl-27xNH5LZPoUpfYVFtrGiCRdWD1PvX5HgzMew"
+            },
+            "tests": []
+        },
+        {
+            "_id": "06c0ba42-4120-4ae7-9bae-a6a407194f0d",
+            "colId": "56bca936-77b9-436f-a4c8-9448de98c0b6",
+            "containerId": "fc1f89d7-ae67-4ffc-8dca-9dbc3e438f01",
+            "name": "DELETE USER BY ID ",
+            "url": "https://project5-dev-mzdz.2.ie-1.fl0.io/api/users/000000000000000000000002",
+            "method": "DELETE",
+            "sortNum": 60000,
+            "created": "2024-03-15T22:27:30.978Z",
+            "modified": "2024-03-15T22:54:16.520Z",
+            "headers": [],
+            "params": [],
+            "reqType": "del",
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWVjNjBiMmQyZjI1MWFiNGQ1NmYwMmEiLCJyb2xlTmFtZSI6InN1cGVyX2FkbWluIiwiaWF0IjoxNzA5OTk2Mzg1LCJleHAiOjE3MTA3MTYzODV9.KunLHl-27xNH5LZPoUpfYVFtrGiCRdWD1PvX5HgzMew"
+            },
+            "tests": []
+        },
+        {
+            "_id": "b32f5971-1f76-4fc2-ada3-dc2cd14ac6a8",
+            "colId": "56bca936-77b9-436f-a4c8-9448de98c0b6",
+            "containerId": "7280d50d-8cff-421c-b220-ed8fd0b4e25f",
+            "name": "CREATE POST",
+            "url": "https://project5-dev-mzdz.2.ie-1.fl0.io/api/posts",
+            "method": "POST",
+            "sortNum": 70000,
+            "created": "2024-03-15T22:27:30.979Z",
+            "modified": "2024-03-15T23:01:55.168Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"content\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud ...\"\n}",
+                "form": []
+            },
+            "reqType": "post",
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWVjNzMzZjk3YTkxNmIxZWM3YjE2ZWIiLCJyb2xlTmFtZSI6ImFkbWluIiwiaWF0IjoxNzEwMDA5OTAzLCJleHAiOjE3MTA3Mjk5MDN9.2rjIUlELJhkkzn-Gaj5elicN6vek20vFL3Z4LjPnERw"
+            },
+            "tests": []
+        },
+        {
+            "_id": "c12f1822-2a9d-44ef-bdc3-90f0a6c6d250",
+            "colId": "56bca936-77b9-436f-a4c8-9448de98c0b6",
+            "containerId": "7280d50d-8cff-421c-b220-ed8fd0b4e25f",
+            "name": "DELETE POST BY ID ",
+            "url": "https://project5-dev-mzdz.2.ie-1.fl0.io/api/posts/65f4d21c9b9bf1f8726956d3",
+            "method": "DELETE",
+            "sortNum": 75000,
+            "created": "2024-03-15T22:27:30.980Z",
+            "modified": "2024-03-15T23:00:46.798Z",
+            "headers": [],
+            "params": [],
+            "reqType": "del",
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWVhNDE3ZWE1MGU5ZTMxZmRmYmRkYzkiLCJyb2xlTmFtZSI6InVzZXIiLCJpYXQiOjE3MDk4NTI0NDIsImV4cCI6MTcxMDU3MjQ0Mn0.J0mrdn0uBogwvekh8OXvQnAzwsprKSwPZ959X4Ng8Aw"
+            },
+            "tests": []
+        },
+        {
+            "_id": "8d681bbe-1f36-49d1-b5f1-9b6b94248a96",
+            "colId": "56bca936-77b9-436f-a4c8-9448de98c0b6",
+            "containerId": "7280d50d-8cff-421c-b220-ed8fd0b4e25f",
+            "name": "UPDATE POST BY ID ",
+            "url": "https://project5-dev-mzdz.2.ie-1.fl0.io/api/posts/65eca8d54168f4c594751544",
+            "method": "PUT",
+            "sortNum": 77500,
+            "created": "2024-03-15T22:27:30.981Z",
+            "modified": "2024-03-15T23:02:33.024Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"content\": \"Something else\"\n}",
+                "form": []
+            },
+            "reqType": "put",
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWVjNjBiMmQyZjI1MWFiNGQ1NmYwMmEiLCJyb2xlTmFtZSI6InN1cGVyX2FkbWluIiwiaWF0IjoxNzA5OTk2Mzg1LCJleHAiOjE3MTA3MTYzODV9.KunLHl-27xNH5LZPoUpfYVFtrGiCRdWD1PvX5HgzMew"
+            },
+            "tests": []
+        },
+        {
+            "_id": "81b4fd23-7945-4f5f-86a5-44655d8cb83c",
+            "colId": "56bca936-77b9-436f-a4c8-9448de98c0b6",
+            "containerId": "7280d50d-8cff-421c-b220-ed8fd0b4e25f",
+            "name": "GET OWN POSTS",
+            "url": "https://project5-dev-mzdz.2.ie-1.fl0.io/api/posts/own?page=1",
+            "method": "GET",
+            "sortNum": 78750,
+            "created": "2024-03-15T22:27:30.982Z",
+            "modified": "2024-03-15T23:05:45.649Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "page",
+                    "value": "1",
+                    "isPath": false
+                }
+            ],
+            "reqType": "get",
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDIiLCJyb2xlTmFtZSI6ImFkbWluIiwiaWF0IjoxNzEwMzcwODQ0LCJleHAiOjE3MTEwOTA4NDR9.ftEIGVjchs7uRVeFMSZkeELQiWT-a87akWIhYW8YVUM"
+            },
+            "tests": []
+        },
+        {
+            "_id": "5143d88b-4e78-41a4-b18b-059a5e0a2db1",
+            "colId": "56bca936-77b9-436f-a4c8-9448de98c0b6",
+            "containerId": "7280d50d-8cff-421c-b220-ed8fd0b4e25f",
+            "name": "GET ALL POSTS",
+            "url": "https://project5-dev-mzdz.2.ie-1.fl0.io/api/posts",
+            "method": "GET",
+            "sortNum": 80000,
+            "created": "2024-03-15T22:27:30.983Z",
+            "modified": "2024-03-15T23:07:29.843Z",
+            "headers": [],
+            "params": [],
+            "reqType": "get",
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik5vcm1hbFVzZXIiLCJ1c2VySWQiOiIwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDMiLCJyb2xlTmFtZSI6InVzZXIiLCJpYXQiOjE3MTAzNzM5NzUsImV4cCI6MTcxMTA5Mzk3NX0.9tlXjE11iizYPoXUiwVQYfvZNC0lTx9DyItvyuhjs9A"
+            },
+            "tests": []
+        },
+        {
+            "_id": "a7b0a0f4-d92e-469f-91db-9a27c9196748",
+            "colId": "56bca936-77b9-436f-a4c8-9448de98c0b6",
+            "containerId": "7280d50d-8cff-421c-b220-ed8fd0b4e25f",
+            "name": "GET POST BY ID",
+            "url": "https://project5-dev-mzdz.2.ie-1.fl0.io/api/posts/65f4cc0940c822ebdc9c2bdf",
+            "method": "GET",
+            "sortNum": 90000,
+            "created": "2024-03-15T22:27:30.984Z",
+            "modified": "2024-03-15T23:08:49.911Z",
+            "headers": [],
+            "params": [],
+            "reqType": "get",
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWVjNzMzZjk3YTkxNmIxZWM3YjE2ZWIiLCJyb2xlTmFtZSI6ImFkbWluIiwiaWF0IjoxNzEwMDA5OTAzLCJleHAiOjE3MTA3Mjk5MDN9.2rjIUlELJhkkzn-Gaj5elicN6vek20vFL3Z4LjPnERw"
+            },
+            "tests": []
+        },
+        {
+            "_id": "aa5d5873-0a93-4bfe-a2ca-42a965dfea3d",
+            "colId": "56bca936-77b9-436f-a4c8-9448de98c0b6",
+            "containerId": "7280d50d-8cff-421c-b220-ed8fd0b4e25f",
+            "name": "GET POST BY UserID",
+            "url": "https://project5-dev-mzdz.2.ie-1.fl0.io/api/users/posts/000000000000000000000004?page=1",
+            "method": "GET",
+            "sortNum": 100000,
+            "created": "2024-03-15T22:27:30.985Z",
+            "modified": "2024-03-15T23:09:45.985Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "page",
+                    "value": "1",
+                    "isPath": false
+                }
+            ],
+            "reqType": "get",
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik5vcm1hbFVzZXIiLCJ1c2VySWQiOiIwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDMiLCJyb2xlTmFtZSI6InVzZXIiLCJpYXQiOjE3MTAzNzM5NzUsImV4cCI6MTcxMTA5Mzk3NX0.9tlXjE11iizYPoXUiwVQYfvZNC0lTx9DyItvyuhjs9A"
+            },
+            "tests": []
+        },
+        {
+            "_id": "46cd2977-8220-47c3-a68c-e1c81a1301fe",
+            "colId": "56bca936-77b9-436f-a4c8-9448de98c0b6",
+            "containerId": "7280d50d-8cff-421c-b220-ed8fd0b4e25f",
+            "name": "LIKE POST",
+            "url": "https://project5-dev-mzdz.2.ie-1.fl0.io/api/posts/like/65f4cc0940c822ebdc9c2bdf",
+            "method": "PUT",
+            "sortNum": 110000,
+            "created": "2024-03-15T22:27:30.986Z",
+            "modified": "2024-03-15T23:11:29.168Z",
+            "headers": [],
+            "params": [],
+            "reqType": "put",
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik5vcm1hbFVzZXIiLCJ1c2VySWQiOiIwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDMiLCJyb2xlTmFtZSI6InVzZXIiLCJpYXQiOjE3MTAzNzM5NzUsImV4cCI6MTcxMTA5Mzk3NX0.9tlXjE11iizYPoXUiwVQYfvZNC0lTx9DyItvyuhjs9A"
+            },
+            "tests": []
+        }
+    ]
+}
