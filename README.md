@@ -206,7 +206,7 @@ Users can follow other users (Following), and therefore, a user can have followe
 
 -	GET USER's OWN PROFILE
 
-      GET https://project5-dev-mzdz.2.ie-1.fl0.io/api/users/profile
+    	GET https://project5-dev-mzdz.2.ie-1.fl0.io/api/users/profile
 
 -   UPDATE PROFILE (for the currently logged user)
 
