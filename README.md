@@ -59,6 +59,9 @@ Users can follow other users (Following), and therefore, a user can have followe
 - All non-public endpoints with corresponding middlewares.
 - Deployment
 
+## Database diagram
+
+![database diagram](./src/img/P5_diagram.png)
 
 ## Instalation (local)
 1.  Clone this repository
@@ -71,6 +74,85 @@ Users can follow other users (Following), and therefore, a user can have followe
 *You can select the ammount of fake users and posts you want to create modifying variable 'numberOfUsers' when instanciating the seeder functions `runSeeders(numberOfUsers)` from the seeds.js file. 
 
 *Running seeders would firstly erase all entries from database and populate from zero.
+
+## Project development
+
+<details>
+  <summary>1. MongoDB - Database Design</summary>
+    
+-   Analyze the project requirements and decide what is the best data structure for a social network application.
+-   Concept design: create a Schema defining collections, their fields, and the relationships between them.
+-   Design models considering data storage and possible relations with other the models.
+</details>
+
+<details>
+  <summary>2. Docker - Setting up MongoDB</summary>
+
+-   Install Docker.
+-   Create a container for MongoDB.
+> $ docker run -d -p 27017:27017 --name mongo -v mongo-data:/data/db -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=root mongo:latest
+-   Access the MongoDB container.
+-   Set up a MongoDB client tool like Compass for easier database management.
+</details>
+
+<details>
+  <summary>3. Express - Creating REST API</summary>
+
+-   Initialize Node.js project: `$ npm init`.
+-   Install Express.js: `$ npm install express`.
+-   Set up routes, controllers, and middleware for user authentication, profile management, and post handling.
+-   Use Mongoose as an ODM (Object Data Modeling) library to interact with MongoDB from Node.js.
+</details>
+
+<details>
+  <summary>4. Mongoose - Connecting to MongoDB</summary>
+
+-   Create a connection to MongoDB using Mongoose in your Express application.
+> $ npm i mongoose --save
+-   Define Mongoose schemas for user profiles, posts, likes, etc.
+-   Implement CRUD operations using Mongoose methods for data manipulation.
+</details>
+
+<details>
+  <summary>5. Authentication & Authorization</summary>
+
+-   Implement user authentication using JWT (JSON Web Tokens) for session management.
+-   Set up authorization middleware to restrict access to certain routes or resources based on user roles and permissions (i.e. super_admin).
+-   Hash passwords securely before storing them in the database (i.e. with bcrypt library).
+</details>
+
+
+<details>
+  <summary>6. Seeding</summary>
+
+- In order to check out this project, you'll need to ppopulate the database.
+
+- Follow seeding steps from the <a href="#instalation-local">instalation</a> section:
+	> Run seeders:  ` $ npm run seed `
+</details>
+
+
+<details>
+  <summary>7. Error Handling</summary>
+
+-   Use try/catch system in all functions to validate user input and control general data intake before processing.
+-   Implement specific "error handling middleware" to catch and respond to errors gracefully (i.e. email and password validation).
+-   Return appropriate HTTP status codes and error messages in responses.
+-	Optionally create "success handling middleware" to refactor functions, improving code readability.
+</details>
+
+<details>
+  <summary>8. Testing & Debugging</summary>
+
+-   Debug and troubleshoot issues using Thunder Client.
+-   Use this tool for API testing and validation during development and also after deployment to check all endpoints work properly.
+</details>
+
+<details>
+  <summary>9. Deployment</summary>
+
+-   Deploy the application to a cloud platform. In this case it is deployed to Fl0.
+</details>
 
 
 ## Endpoints
@@ -215,181 +297,9 @@ Find here the collection of all endpoints in Thunder Client:
 `./src/HTTP/DEPLOYMENT_thunder-collection_P.5_social media_MONGO.json`
 
 
-<!-- ## Project Development:
 
-<details>
-  <summary>1. SQL - Database design:</summary>
-    
--   Analyze the task to find the purpose of the database and gather all requirements
--   Concept design: create an Entity-Relationship Diagram where we
-define tables, their attributes, and the relationships with one another.
--   Normalization: eliminate redundancy, identify primary keys (PK) and foreign keys (FK)
--   Logical thinking: decide what can and cannot be 'NULL' (not required) and which are 'UNIQUE' fields
-</details>
+## Deployment
 
-<details>
-  <summary>2. DOCKER - Creating a container</summary>
-
--   Install docker
-- Create a container
-    > docker run -d -p 3306:3306 --name <container-name> -e MYSQL_ROOT_PASSWORD=<your_password> mysql
-- Access it
-    > mysql -h localhost -P 3306 -u root -p
-you will need -h (host), -P (port), -u (username) and -p (password)
-- Execute it
-    > docker exec -it mysql-pruebas bash
-</details>
-
-<details>
-  <summary>3. EXPRESS - Create a server connection</summary>
-
-- We initiate NODE:  `$ npm init` 
-    This creates 'package.json' where all the dependencies will be stored.
-
-- We run the command: `$ npm install express --save`
-    This creates 'package-lock.json' and the 'node_modules' folder
-
-- We create the folder '.gitignore' and add '/node_modules' inside
-    This blocks the heavy folder from being upload to github with the rest of the project.
-
-- We install TYPESCRIPT (as developers) `$ npm install typescript -D`
-
-- We create the 'tsconfig.json' file: `$ npx tsc --init`
-
-- We install types /express & node: `$ npm install @types/express @types/node -D`
-
-- We install dependencies to compile TS (nodemon): `$ npm install ts-node nodemon -D`
-
-- We add a shortcut to the package.json's scripts:
-    > "dev": "nodemon ./src/server.ts"
-
-- We create the file '.env' with the PORT (of the server) and add '.env' to the '.gitignore'.
-
-    Also add a copy '.env.sample' where we will storage a blueprint of data, without the sensitive information (in this case: 'PORT= ')
-
-- We install 'dotenv': `$ npm i dotenv`
-    This gets added to the dependencies and will grab data from the .env file
-</details>
-
-<details>
-  <summary>4. DOTENV - Connect to the DB</summary>
-
-- We create the folder 'src' with a 'server.ts' file inside.
-    The main function connects to the server `startServer();`<br/>
-- We link a new file called `app.ts` to separate responsabilities.<br/>
--   In this file we write the following code:
-
-    ```js
-    import express from "express";
-    import dotenv from "dotenv";
-    import { Request, Response } from "express";
-    
-    // links the .env folder
-    dotenv.config(); 
-
-    // runs server connection
-    const app = express(); 
-
-    // parses responses to .json)
-    app.use(express.json()); 
-
-    // sets up the connection port
-    const PORT = process.env.PORT || 4002; 
-
-    // server is up and listening to any upcomming request
-    app.listen(3000, () => console.log('Servidor levantado en 3000')); 
-
-
-    // testing request - 'Hello world' means we are ready to go!
-    app.get('/', (req: Request, res: Response) => {
-        res.send('Hello world!')
-    }); 
-    ```
-
-- We run the server using the previously created nodemon shortcut: `$ npm run dev`
-</details>
-
-<details>
-  <summary>5. MySQL Workbench</summary>
-
-- We open the workbench and run the following commands:
-
-    ```sql
-    CREATE DATABASE <project_name>;
-    USE <project_name>;
-    ```
-</details>
-
-<details>
-  <summary>6. MIGRATIONS & MODELS</summary>
-
-- Creating MIGRATIONS [Data Definition Language (DDL): with typeorm]: `./src/database/migrations`
-- Adding them to `DataSource.migrations` in the `db.ts` file: `Role, User, Service, Appointment`
-- Creating MODELS (entities) [Data Manipulation Language (DML)]
-- Adding them to `DataSource.entities` in the `db.ts` file: `Roles, Users, Services, Appointments`
-</details>
-
-<details>
-  <summary>7. CONTROLLERS</summary>
-
-- We create controllers (in a folder on the same level with `package.json`): 
-    > `auth, roles, users, services, appointments`
-</details>
-
-<details>
-  <summary>8. ROUTES</summary>
-
-- We create routes (in `app.ts`) for CRUD (create, read, update and delete) database records.
-</details>
-
-<details>
-  <summary>9. MIDDLEWARE: auth()</summary>
-  
-  - Additionally we need to control access to our data. We will use 'middleware' functions.
-
-  -  `Auth` (authorisation systembased on TOKENs) will block anything that is not to be seen by the general public. In our case, it only does not affect to `register`, `login` and `getServices` (as those are the endpoints reachable without logging in)
-  -  The `auth()` function verifies an encrypted TOKEN created automatically while logging in. With an active token we have access to other data.
-</details>
-
-<details>
-  <summary>10. MIDDLEWARE: isSuperAdmin()</summary>
-  
-- We also want to grant special administrative access. With another middleware, the `isSuperAdmin()` function, we control PERMISSIONS.
-- The 'superadmin' role would be able to reach all data, while Users would have a more limited reach. More levels can be implemented
-</details>
-
-<details>
-  <summary>11. TOKENDATA</summary>
-
-- For the TOKEN to work, we create a new file `./types/index.d.ts` with the following lines:
-
-    ```js
-    export type tokenData = {
-        userId: number;
-        roleName: string;
-    };
-
-    declare global {
-        namespace Express {
-            export interface Request {
-                tokenData: tokenData;
-            }
-        }
-    }
-    ```
-</details>
-
-<details>
-  <summary>12. SEEDERS</summary>
-
-- In order to check out this project, you'll need to ppopulate the database.
-
-- Follow steps 5 and 6 of the <a href="#instalation-local">instalation</a>
-</details>
-
-
-## Deployment -->
-The project is deployed here:
 https://project5-dev-mzdz.2.ie-1.fl0.io/api/healthy
 
 
@@ -399,82 +309,4 @@ https://project5-dev-mzdz.2.ie-1.fl0.io/api/healthy
 <a href = "mailto:a.sergiotorres@gmail.com"><img src="https://img.shields.io/badge/Gmail-C6362C?style=for-the-badge&logo=gmail&logoColor=white" target="_blank"></a>
 <a href="https://github.com/SergioTorresGarcia" target="_blank"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" /></a> 
 </div>
-
-
-
-<!-- ### Como hacer un proyecto desde cero:
-
-```bash
-
-$ npm init -y
-```
-
-```bash
-$ npm i express
-```
-
-Creamos .gitignore y añadimos:
-	/node.modules
-	.env
-
-```bash
-$ npm i nodemon -D
-```
-
-```bash
-$ npm i dotenv -E
-```
-
-creamos carpeta src:
-    server.js
-
-añadir script en package.json:
-
-```bash
-"dev": "nodemon ./src/server.js"
-```
-
-///////////////
-
-añadimos linea (bajo "main" en package.json:
-) 
-```json
-"type": "module",
-```
-Cambiamos el require por:
-```bash
-import express from "express";
-import 'dotenv/config';
-```
-
-ejecutar en powershell:
-```bash
-$ docker run -d -p 27017:27017 --name mongo -v mongo-data:/data/db -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=root mongo:latest
-```
-
-instalamos mongoose:
-```bash
-$ npm i mongoose --save
-```
-
-instalamos bcrypt:
-```bash
-$ npm i bcrypt
-```
-instalamos jwt:
-```bash
-$ npm i jsonwebtoken
-```
-
-```txt
-creamos modelo
-```
-
-```txt
-creamos controlador
-```
-
-```txt
-creamos la ruta
-``` -->
 
