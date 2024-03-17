@@ -3,8 +3,8 @@ import { createPost, deletePostById, getOwnPosts, getPostById, getPosts, getTime
 import { auth } from "../middlewares/auth.js";
 
 const router = Router();
-router.get('/timeline', auth, getTimeline)          // OK - Getting posts of people you follow
 
+router.get('/timeline', auth, getTimeline)          // OK - Getting posts of people you follow
 router.post('/', auth, createPost)                  // OK - Creating a post
 router.delete('/:id', auth, deletePostById)         // OK - Deleting a post by ID
 router.put('/:id', auth, updatePostById)            // OK - Updating a post by ID

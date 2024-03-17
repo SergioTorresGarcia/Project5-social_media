@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "P.5_social media_MONGO",
-    "dateExported": "2024-03-17T10:04:23.915Z",
+    "dateExported": "2024-03-17T22:53:09.918Z",
     "version": "1.1",
     "folders": [
         {
@@ -76,7 +76,7 @@
             "method": "GET",
             "sortNum": 30000,
             "created": "2024-03-09T11:42:13.241Z",
-            "modified": "2024-03-15T22:26:13.199Z",
+            "modified": "2024-03-17T22:02:58.857Z",
             "headers": [],
             "params": [
                 {
@@ -218,15 +218,19 @@
             "_id": "d674e941-fbcd-4d02-81c6-10ad181eb526",
             "colId": "df9785f3-faad-40aa-94ea-d281170cac00",
             "containerId": "4313434a-7ed2-4cb6-9efa-026360f2ee66",
-            "name": "FOLLOW/UNFOLLOR USER BY ID",
-            "url": "https://project5-dev-mzdz.2.ie-1.fl0.io/api/users/follow/000000000000000000000002",
+            "name": "FOLLOW/UNFOLLOW USER BY ID",
+            "url": "http://localhost:4001/api/users/follow/000000000000000000000004",
             "method": "PUT",
             "sortNum": 70000,
             "created": "2024-03-17T09:57:37.673Z",
-            "modified": "2024-03-17T09:57:37.674Z",
+            "modified": "2024-03-17T22:03:42.128Z",
             "headers": [],
             "params": [],
             "reqType": "put",
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlN1cGVyQWRtaW4iLCJ1c2VySWQiOiIwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDEiLCJyb2xlTmFtZSI6InN1cGVyX2FkbWluIiwiaWF0IjoxNzEwNjcwNDQxLCJleHAiOjE3MTEzOTA0NDF9.4jK476dDwps0O4BjM9WjCBVI0IacULbhs4HHDiXTisU"
+            },
             "tests": []
         },
         {
@@ -382,6 +386,25 @@
             "auth": {
                 "type": "bearer",
                 "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik5vcm1hbFVzZXIiLCJ1c2VySWQiOiIwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDMiLCJyb2xlTmFtZSI6InVzZXIiLCJpYXQiOjE3MTAzNzM5NzUsImV4cCI6MTcxMTA5Mzk3NX0.9tlXjE11iizYPoXUiwVQYfvZNC0lTx9DyItvyuhjs9A"
+            },
+            "tests": []
+        },
+        {
+            "_id": "a4d8aabc-49dc-4ec5-9610-1fe53c818ea9",
+            "colId": "df9785f3-faad-40aa-94ea-d281170cac00",
+            "containerId": "398b0d6f-ec78-4e07-a4fa-e16bdab34a72",
+            "name": "GET TIMELINE",
+            "url": "http://localhost:4001/api/posts/timeline",
+            "method": "GET",
+            "sortNum": 120000,
+            "created": "2024-03-17T21:04:09.609Z",
+            "modified": "2024-03-17T21:23:12.648Z",
+            "headers": [],
+            "params": [],
+            "reqType": "put",
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlN1cGVyQWRtaW4iLCJ1c2VySWQiOiIwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDEiLCJyb2xlTmFtZSI6InN1cGVyX2FkbWluIiwiaWF0IjoxNzEwNzA5NjYxLCJleHAiOjE3MTE0Mjk2NjF9.YJBjeHcst4ObcL-xj9Pa9Eay-2oIBGJ4ANe2F8hEzbE"
             },
             "tests": []
         }

@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "P.5_social media_MONGO_deployed",
-    "dateExported": "2024-03-17T10:05:00.504Z",
+    "dateExported": "2024-03-17T22:52:48.650Z",
     "version": "1.1",
     "folders": [
         {
@@ -364,14 +364,33 @@
             "colId": "56bca936-77b9-436f-a4c8-9448de98c0b6",
             "containerId": "fc1f89d7-ae67-4ffc-8dca-9dbc3e438f01",
             "name": "FOLLOW/UNFOLLOR USER BY ID",
-            "url": "https://project5-dev-mzdz.2.ie-1.fl0.io/api/users/follow/000000000000000000000002",
+            "url": "https://project5-dev-mzdz.2.ie-1.fl0.io/api/users/follow/000000000000000000000003",
             "method": "PUT",
             "sortNum": 120000,
             "created": "2024-03-17T09:19:29.890Z",
-            "modified": "2024-03-17T09:56:48.790Z",
+            "modified": "2024-03-17T10:33:48.212Z",
             "headers": [],
             "params": [],
             "reqType": "put",
+            "tests": []
+        },
+        {
+            "_id": "5108338c-6a8b-4363-b935-1cd84784d76e",
+            "colId": "56bca936-77b9-436f-a4c8-9448de98c0b6",
+            "containerId": "7280d50d-8cff-421c-b220-ed8fd0b4e25f",
+            "name": "GET TIMELINE",
+            "url": "https://project5-dev-mzdz.2.ie-1.fl0.io/api/posts/timeline",
+            "method": "GET",
+            "sortNum": 120000,
+            "created": "2024-03-17T22:51:17.277Z",
+            "modified": "2024-03-17T22:51:43.103Z",
+            "headers": [],
+            "params": [],
+            "reqType": "get",
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlN1cGVyQWRtaW4iLCJ1c2VySWQiOiIwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDEiLCJyb2xlTmFtZSI6InN1cGVyX2FkbWluIiwiaWF0IjoxNzEwNzA5NjYxLCJleHAiOjE3MTE0Mjk2NjF9.YJBjeHcst4ObcL-xj9Pa9Eay-2oIBGJ4ANe2F8hEzbE"
+            },
             "tests": []
         }
     ]
