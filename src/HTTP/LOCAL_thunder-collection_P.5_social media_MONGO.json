@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "P.5_social media_MONGO",
-    "dateExported": "2024-03-10T11:30:25.510Z",
+    "dateExported": "2024-03-17T10:04:23.915Z",
     "version": "1.1",
     "folders": [
         {
@@ -32,16 +32,16 @@
             "colId": "df9785f3-faad-40aa-94ea-d281170cac00",
             "containerId": "3e41a464-b32e-4aac-be85-26cb09f541cf",
             "name": "REGISTER",
-            "url": "localhost:4001/api/auth/register",
+            "url": "http://localhost:4001/api/auth/register",
             "method": "POST",
             "sortNum": 10000,
             "created": "2024-03-09T11:42:13.239Z",
-            "modified": "2024-03-10T10:52:40.681Z",
+            "modified": "2024-03-17T09:24:16.799Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"username\": \"sadfhsb\",\n  \"email\":\"useadfsfbr@mail.com\",\n  \"password\": \"123456\"\n}",
+                "raw": "{\n  \"username\": \"sergio\",\n  \"email\":\"sergio@mail.com\",\n  \"password\": \"123456\"\n}",
                 "form": []
             },
             "reqType": "post",
@@ -52,16 +52,16 @@
             "colId": "df9785f3-faad-40aa-94ea-d281170cac00",
             "containerId": "3e41a464-b32e-4aac-be85-26cb09f541cf",
             "name": "LOGIN",
-            "url": "localhost:4001/api/auth/login",
+            "url": "http://localhost:4001/api/auth/login",
             "method": "POST",
             "sortNum": 20000,
             "created": "2024-03-09T11:42:13.240Z",
-            "modified": "2024-03-10T10:51:48.414Z",
+            "modified": "2024-03-17T09:59:27.734Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"email\":\"useadfsfbr@mail.com\",\n  \"password\": \"123456\"\n}",
+                "raw": "{\n  \"email\":\"superadmin@superadmin.com\",\n  \"password\": \"123456\"\n}",
                 "form": []
             },
             "reqType": "post",
@@ -72,29 +72,35 @@
             "colId": "df9785f3-faad-40aa-94ea-d281170cac00",
             "containerId": "4313434a-7ed2-4cb6-9efa-026360f2ee66",
             "name": "GET ALL USERS",
-            "url": "http://localhost:4001/api/users?username=User",
+            "url": "http://localhost:4001/api/users?page=1",
             "method": "GET",
             "sortNum": 30000,
             "created": "2024-03-09T11:42:13.241Z",
-            "modified": "2024-03-09T23:12:39.767Z",
+            "modified": "2024-03-15T22:26:13.199Z",
             "headers": [],
             "params": [
                 {
                     "name": "page",
-                    "value": "2",
-                    "isDisabled": true,
+                    "value": "1",
                     "isPath": false
                 },
                 {
                     "name": "username",
-                    "value": "User",
+                    "value": "AdminUser",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "email",
+                    "value": "user@user.com",
+                    "isDisabled": true,
                     "isPath": false
                 }
             ],
             "reqType": "get",
             "auth": {
                 "type": "bearer",
-                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWVjNjBiMmQyZjI1MWFiNGQ1NmYwMmEiLCJyb2xlTmFtZSI6InN1cGVyX2FkbWluIiwiaWF0IjoxNzA5OTk2Mzg1LCJleHAiOjE3MTA3MTYzODV9.KunLHl-27xNH5LZPoUpfYVFtrGiCRdWD1PvX5HgzMew"
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlN1cGVyQWRtaW4iLCJ1c2VySWQiOiIwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDEiLCJyb2xlTmFtZSI6InN1cGVyX2FkbWluIiwiaWF0IjoxNzEwNDYwODUwLCJleHAiOjE3MTExODA4NTB9.RPwlsGMZkJk_z2LU0MAKYGxKqojHAaHhn_Jk8osq3Ng"
             },
             "tests": []
         },
@@ -209,6 +215,21 @@
             "tests": []
         },
         {
+            "_id": "d674e941-fbcd-4d02-81c6-10ad181eb526",
+            "colId": "df9785f3-faad-40aa-94ea-d281170cac00",
+            "containerId": "4313434a-7ed2-4cb6-9efa-026360f2ee66",
+            "name": "FOLLOW/UNFOLLOR USER BY ID",
+            "url": "https://project5-dev-mzdz.2.ie-1.fl0.io/api/users/follow/000000000000000000000002",
+            "method": "PUT",
+            "sortNum": 70000,
+            "created": "2024-03-17T09:57:37.673Z",
+            "modified": "2024-03-17T09:57:37.674Z",
+            "headers": [],
+            "params": [],
+            "reqType": "put",
+            "tests": []
+        },
+        {
             "_id": "7df153e8-7699-40b0-a05d-7a18eb89f0ed",
             "colId": "df9785f3-faad-40aa-94ea-d281170cac00",
             "containerId": "398b0d6f-ec78-4e07-a4fa-e16bdab34a72",
@@ -260,7 +281,7 @@
             "method": "GET",
             "sortNum": 78750,
             "created": "2024-03-09T18:39:48.850Z",
-            "modified": "2024-03-09T18:59:04.264Z",
+            "modified": "2024-03-13T23:11:35.993Z",
             "headers": [],
             "params": [
                 {
@@ -272,7 +293,7 @@
             "reqType": "get",
             "auth": {
                 "type": "bearer",
-                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWVjNzMzZjk3YTkxNmIxZWM3YjE2ZWIiLCJyb2xlTmFtZSI6ImFkbWluIiwiaWF0IjoxNzEwMDA5OTAzLCJleHAiOjE3MTA3Mjk5MDN9.2rjIUlELJhkkzn-Gaj5elicN6vek20vFL3Z4LjPnERw"
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDIiLCJyb2xlTmFtZSI6ImFkbWluIiwiaWF0IjoxNzEwMzcwODQ0LCJleHAiOjE3MTEwOTA4NDR9.ftEIGVjchs7uRVeFMSZkeELQiWT-a87akWIhYW8YVUM"
             },
             "tests": []
         },
@@ -285,7 +306,7 @@
             "method": "GET",
             "sortNum": 80000,
             "created": "2024-03-09T11:42:13.247Z",
-            "modified": "2024-03-09T22:29:33.757Z",
+            "modified": "2024-03-14T00:21:39.971Z",
             "headers": [],
             "params": [
                 {
@@ -297,7 +318,7 @@
             "reqType": "get",
             "auth": {
                 "type": "bearer",
-                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWVjNzMzZjk3YTkxNmIxZWM3YjE2ZWIiLCJyb2xlTmFtZSI6ImFkbWluIiwiaWF0IjoxNzEwMDA5OTAzLCJleHAiOjE3MTA3Mjk5MDN9.2rjIUlELJhkkzn-Gaj5elicN6vek20vFL3Z4LjPnERw"
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik5vcm1hbFVzZXIiLCJ1c2VySWQiOiIwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDMiLCJyb2xlTmFtZSI6InVzZXIiLCJpYXQiOjE3MTAzNzM5NzUsImV4cCI6MTcxMTA5Mzk3NX0.9tlXjE11iizYPoXUiwVQYfvZNC0lTx9DyItvyuhjs9A"
             },
             "tests": []
         },
@@ -306,11 +327,11 @@
             "colId": "df9785f3-faad-40aa-94ea-d281170cac00",
             "containerId": "398b0d6f-ec78-4e07-a4fa-e16bdab34a72",
             "name": "GET POST BY ID",
-            "url": "http://localhost:4001/api/posts/65ecad9f4483a44b3b72651e",
+            "url": "http://localhost:4001/api/posts/65f22f112b517058a4d59900",
             "method": "GET",
             "sortNum": 90000,
             "created": "2024-03-09T11:42:13.248Z",
-            "modified": "2024-03-09T19:16:37.935Z",
+            "modified": "2024-03-13T23:02:01.742Z",
             "headers": [],
             "params": [],
             "reqType": "get",
@@ -325,23 +346,23 @@
             "colId": "df9785f3-faad-40aa-94ea-d281170cac00",
             "containerId": "398b0d6f-ec78-4e07-a4fa-e16bdab34a72",
             "name": "GET POST BY UserID",
-            "url": "http://localhost:4001/api/users/posts/65ec60b2d2f251ab4d56f02a?page=2",
+            "url": "http://localhost:4001/api/users/posts/000000000000000000000001?page=1",
             "method": "GET",
             "sortNum": 100000,
             "created": "2024-03-09T19:22:32.169Z",
-            "modified": "2024-03-09T20:45:48.855Z",
+            "modified": "2024-03-13T23:53:07.400Z",
             "headers": [],
             "params": [
                 {
                     "name": "page",
-                    "value": "2",
+                    "value": "1",
                     "isPath": false
                 }
             ],
             "reqType": "get",
             "auth": {
                 "type": "bearer",
-                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWVjNzMzZjk3YTkxNmIxZWM3YjE2ZWIiLCJyb2xlTmFtZSI6ImFkbWluIiwiaWF0IjoxNzEwMDA5OTAzLCJleHAiOjE3MTA3Mjk5MDN9.2rjIUlELJhkkzn-Gaj5elicN6vek20vFL3Z4LjPnERw"
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik5vcm1hbFVzZXIiLCJ1c2VySWQiOiIwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDMiLCJyb2xlTmFtZSI6InVzZXIiLCJpYXQiOjE3MTAzNzM5NzUsImV4cCI6MTcxMTA5Mzk3NX0.9tlXjE11iizYPoXUiwVQYfvZNC0lTx9DyItvyuhjs9A"
             },
             "tests": []
         },
@@ -350,17 +371,17 @@
             "colId": "df9785f3-faad-40aa-94ea-d281170cac00",
             "containerId": "398b0d6f-ec78-4e07-a4fa-e16bdab34a72",
             "name": "LIKE POST",
-            "url": "http://localhost:4001/api/posts/like/65eca8bc4168f4c594751542",
+            "url": "http://localhost:4001/api/posts/like/65f23c8878b001927f788117",
             "method": "PUT",
             "sortNum": 110000,
             "created": "2024-03-09T21:09:41.830Z",
-            "modified": "2024-03-09T22:35:22.430Z",
+            "modified": "2024-03-13T23:55:17.384Z",
             "headers": [],
             "params": [],
-            "reqType": "get",
+            "reqType": "put",
             "auth": {
                 "type": "bearer",
-                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWVjNzQwYzFhMzUyNWNkZDhhOWJmMWYiLCJyb2xlTmFtZSI6InVzZXIiLCJpYXQiOjE3MTAwMjM0NDEsImV4cCI6MTcxMDc0MzQ0MX0.-_fd7zSLHpOGdaXaDRVFBPppM-IWwhfjkCeztgpPrJk"
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik5vcm1hbFVzZXIiLCJ1c2VySWQiOiIwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDMiLCJyb2xlTmFtZSI6InVzZXIiLCJpYXQiOjE3MTAzNzM5NzUsImV4cCI6MTcxMTA5Mzk3NX0.9tlXjE11iizYPoXUiwVQYfvZNC0lTx9DyItvyuhjs9A"
             },
             "tests": []
         }

@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "P.5_social media_MONGO_deployed",
-    "dateExported": "2024-03-15T23:15:37.775Z",
+    "dateExported": "2024-03-17T10:05:00.504Z",
     "version": "1.1",
     "folders": [
         {
@@ -72,11 +72,11 @@
             "colId": "56bca936-77b9-436f-a4c8-9448de98c0b6",
             "containerId": "fc1f89d7-ae67-4ffc-8dca-9dbc3e438f01",
             "name": "GET ALL USERS",
-            "url": "https://project5-dev-mzdz.2.ie-1.fl0.io/api/users",
+            "url": "http://localhost:4001/api/users",
             "method": "GET",
             "sortNum": 30000,
             "created": "2024-03-15T22:27:30.974Z",
-            "modified": "2024-03-15T22:50:57.590Z",
+            "modified": "2024-03-17T09:59:43.720Z",
             "headers": [],
             "params": [
                 {
@@ -95,7 +95,7 @@
             "reqType": "get",
             "auth": {
                 "type": "bearer",
-                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlN1cGVyQWRtaW4iLCJ1c2VySWQiOiIwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDEiLCJyb2xlTmFtZSI6InN1cGVyX2FkbWluIiwiaWF0IjoxNzEwNTQxOTY2LCJleHAiOjE3MTEyNjE5NjZ9.xSeOsgsSzoggoYaiheKdu_r4ybBZHgkY1UD1UJAjkaE"
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlN1cGVyQWRtaW4iLCJ1c2VySWQiOiIwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDEiLCJyb2xlTmFtZSI6InN1cGVyX2FkbWluIiwiaWF0IjoxNzEwNjY5NTcwLCJleHAiOjE3MTEzODk1NzB9.fPOR2aXDkS4f5LbYvNsxdL1s4OH7ujgJvhnUZBOOjdY"
             },
             "tests": []
         },
@@ -357,6 +357,21 @@
                 "type": "bearer",
                 "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik5vcm1hbFVzZXIiLCJ1c2VySWQiOiIwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDMiLCJyb2xlTmFtZSI6InVzZXIiLCJpYXQiOjE3MTAzNzM5NzUsImV4cCI6MTcxMTA5Mzk3NX0.9tlXjE11iizYPoXUiwVQYfvZNC0lTx9DyItvyuhjs9A"
             },
+            "tests": []
+        },
+        {
+            "_id": "f8697cd2-bced-44e6-bdde-6d00bafff606",
+            "colId": "56bca936-77b9-436f-a4c8-9448de98c0b6",
+            "containerId": "fc1f89d7-ae67-4ffc-8dca-9dbc3e438f01",
+            "name": "FOLLOW/UNFOLLOR USER BY ID",
+            "url": "https://project5-dev-mzdz.2.ie-1.fl0.io/api/users/follow/000000000000000000000002",
+            "method": "PUT",
+            "sortNum": 120000,
+            "created": "2024-03-17T09:19:29.890Z",
+            "modified": "2024-03-17T09:56:48.790Z",
+            "headers": [],
+            "params": [],
+            "reqType": "put",
             "tests": []
         }
     ]
