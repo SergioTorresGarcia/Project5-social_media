@@ -101,17 +101,17 @@ export const followUser = async (req, res) => {
         const followedList = toFollowUser.followedBy;
 
         // Check if the user has already liked the post
-        if (followingList.includes(followedId)) {
-            followingList.remove(followedId);
-            followedList.remove(followerId);
+        if (followingList.includes(toFollowUser.username)) {
+            followingList.remove(toFollowUser.username);
+            followedList.remove(followerUser.username);
 
             const userFollowing = await followerUser.save();
             const userFollowed = await toFollowUser.save();
 
             handleSuccess(res, `User ${userFollowed.username} unfollowed`, userFollowed.following)
         } else {
-            followingList.push(followedId);
-            followedList.push(followerId);
+            followingList.push(toFollowUser.username);
+            followedList.push(followerUser.username);
 
             const userFollowing = await followerUser.save();
             const userFollowed = await toFollowUser.save();
