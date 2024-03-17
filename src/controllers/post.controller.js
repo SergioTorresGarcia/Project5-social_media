@@ -118,7 +118,7 @@ export const getPostByUserId = async (req, res) => {
 }
 
 
-export const likePost = async (req, res) => { // TO-DO: Post.update & User.update ??? para controlar likes (ids y usernames)
+export const likePost = async (req, res) => {
     try {
         const username = req.tokenData.username;
         const postId = req.params.id;
@@ -154,3 +154,31 @@ export const likePost = async (req, res) => { // TO-DO: Post.update & User.updat
 }
 
 
+export const getTimeline = async (req, res) => {
+    try {
+        const userId = req.tokenData.userId
+        const me = await User.findById(userId)
+        const favs = me.following // array with people I follow (usernames)
+
+        if (favs.length == 0) {
+            handleError(res, "You are not following anyone yet", 400)
+        }
+        // get user _ids from their usernames
+        const followingUsers = await User.find({ username: { $in: favs } }).select('username');
+        const followingUserIds = followingUsers.map(user => user._id);
+
+        // get all posts made by the people the user follows
+        // '.select' gets us the fields we want from Post
+        // '.populate' gets us what we want from User ("relation field", "field we want")
+        const posts = await Post.find({ userId: { $in: followingUserIds } }).select('content createdAt').populate('userId', 'username')
+
+        res.status(200).json({
+            success: true,
+            message: "Here are all the post of the people you follow",
+            data: posts
+        })
+
+    } catch (error) {
+        handleError(res, "Timeline is not available")
+    }
+}
