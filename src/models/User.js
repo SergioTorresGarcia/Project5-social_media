@@ -30,7 +30,15 @@ const UserSchema = new Schema(
             bio: {
                 type: String
             }
-        }
+        },
+        following: [{
+            type: String,
+            default: 0
+        }],
+        followedBy: [{
+            type: String,
+            default: 0
+        }]
     },
     {
         timestamps: true,

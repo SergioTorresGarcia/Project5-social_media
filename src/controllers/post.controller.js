@@ -1,4 +1,5 @@
 import Post from "../models/Post.js"
+import User from "../models/User.js"
 import { handleError } from "../utils/handleError.js";
 import { handleSuccess } from "../utils/handleSuccess.js";
 
@@ -151,3 +152,5 @@ export const likePost = async (req, res) => { // TO-DO: Post.update & User.updat
         handleError(res, "Like was not added or taken")
     }
 }
+
+

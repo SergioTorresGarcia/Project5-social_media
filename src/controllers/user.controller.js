@@ -83,3 +83,42 @@ export const updateUserRole = async (req, res) => {
         handleError(res, "User's role cant be updated")
     }
 }
+
+
+export const followUser = async (req, res) => {
+    try {
+        const followerId = req.tokenData.userId; // me following
+        const followedId = req.params.id; // you being followed
+
+        const followerUser = await User.findById(followerId); // user who follows (ME)
+        const toFollowUser = await User.findById(followedId); // user to follow (YOU)
+
+        if (!toFollowUser) { // no user to follow - error
+            handleError(res, "User not found", 404)
+        }
+
+        const followingList = followerUser.following; // list of whom I follow
+        const followedList = toFollowUser.followedBy;
+
+        // Check if the user has already liked the post
+        if (followingList.includes(followedId)) {
+            followingList.remove(followedId);
+            followedList.remove(followerId);
+
+            const userFollowing = await followerUser.save();
+            const userFollowed = await toFollowUser.save();
+
+            handleSuccess(res, `User ${userFollowed.username} unfollowed`, userFollowed.following)
+        } else {
+            followingList.push(followedId);
+            followedList.push(followerId);
+
+            const userFollowing = await followerUser.save();
+            const userFollowed = await toFollowUser.save();
+
+            handleSuccess(res, `Following user ${userFollowed.username}`, userFollowed.following)
+        }
+    } catch (error) {
+        handleError(res, "Unsuccessfully following/unfollowing user")
+    }
+}
