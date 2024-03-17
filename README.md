@@ -282,7 +282,13 @@ Users can follow other users (Following), and therefore, a user can have followe
 
 -	LIKE or UNLIKE A POST
 
-		PUT https://project5-dev-mzdz.2.ie-1.fl0.io/api/posts/:id
+		PUT https://project5-dev-mzdz.2.ie-1.fl0.io/api/posts/like/:id
+
+
+-	GET TIMELINE
+
+		GET https://project5-dev-mzdz.2.ie-1.fl0.io/api/posts/timeline
+		
 </details>
 
 <br />
