@@ -61,7 +61,7 @@ Users can follow other users (Following), and therefore, a user can have followe
 
 ## Database diagram
 
-![database diagram](./src/img/P5_diagram.png)
+![database diagram](./src/img/diagrams_mongo.png)
 
 ## Instalation (local)
 1.  Clone this repository

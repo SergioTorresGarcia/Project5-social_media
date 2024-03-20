@@ -32,12 +32,10 @@ const UserSchema = new Schema(
             }
         },
         following: [{
-            type: String,
-            default: 0
+            type: String
         }],
         followedBy: [{
-            type: String,
-            default: 0
+            type: String
         }]
     },
     {

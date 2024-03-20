@@ -12,12 +12,10 @@ const PostSchema = new Schema(
             required: true,
         },
         likes: [{
-            type: String,
-            default: 0
+            type: String
         }],
         likesCount: {
-            type: Number,
-            default: 0
+            type: Number
         }
     },
     {
